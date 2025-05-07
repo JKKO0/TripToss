@@ -1,6 +1,18 @@
 {
     "version": 2,
-    "outputDirectory": "dist/client",
+    "builds": [
+      {
+        "src": "package.json",
+        "use": "@vercel/static-build",
+        "config": {
+          "distDir": "dist/client"
+        }
+      },
+      {
+        "src": "dist/api/index.js",
+        "use": "@vercel/node"
+      }
+    ],
     "routes": [
       {
         "src": "/api/(.*)",
