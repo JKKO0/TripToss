@@ -54,11 +54,11 @@ export async function generateTripItinerary(tripPrompt: TripPrompt): Promise<Tri
 
 function createPrompt(tripPrompt: TripPrompt): string {
   const accommodationInfo = tripPrompt.accommodation 
-    ? `\nThe traveler will be staying at: ${tripPrompt.accommodation}. At the end of each day's activities, include directions for getting back to this accommodation. Also include a specific tip about the best transportation method to use for returning to this accommodation.` 
+    ? `\nThe traveler will be staying at: ${tripPrompt.accommodation}. At the end of each day's activities, include directions for getting back to this accommodation. Include a Google Maps directions link using this format: https://www.google.com/maps/dir/?api=1&destination=${tripPrompt.accommodation.replace(/\s+/g, '+')}. Also include a tip about the best transportation method for returning.` 
     : '';
 
   return `
-  Create a detailed travel itinerary for a trip to ${tripPrompt.destination} for a duration of ${tripPrompt.duration}. 
+  Create a detailed travel itinerary for a trip to ${tripPrompt.destination} for a duration of ${tripPrompt.duration}.
   The budget is ${tripPrompt.budget} and the traveler is interested in: ${tripPrompt.interests.join(', ')}.${accommodationInfo}
 
   Please format the response in JSON with the following structure:
@@ -72,12 +72,14 @@ function createPrompt(tripPrompt: TripPrompt): string {
           {
             "time": "9:00 AM",
             "title": "Activity title",
-            "description": "Activity description"
+            "description": "Activity description",
+            "googleMapsLink": "Google Maps Link"
           },
           {
             "time": "End of day",
             "title": "Return to accommodation",
-            "description": "Directions for returning to accommodation including transportation options"
+            "description": "Directions back to the accommodation including transport tips",
+            "googleMapsLink": "Google Maps Link"
           }
         ]
       }
@@ -85,13 +87,15 @@ function createPrompt(tripPrompt: TripPrompt): string {
     "tips": ["Tip 1", "Tip 2"]
   }
 
-  The itinerary should include day-by-day activities with timing, dining recommendations, and must-see attractions.
-  Focus on the selected interests and fit within the budget constraints. Include local experiences and hidden gems.
-  Include 3-5 practical travel tips specific to the destination.
-  ${tripPrompt.accommodation ? 'Make sure each day ends with detailed instructions for returning to the accommodation including specific transportation options, routes, estimated time and costs.' : ''}
-  Please strictly follow the JSON structure provided.
+  ✅ For each activity, include a Google Maps link using this format:
+  "https://www.google.com/maps/search/?q=<Place Name or Activity>". Use place names with "+" instead of spaces.
+  ✅ For return-to-accommodation links, use:
+  "https://www.google.com/maps/dir/?api=1&destination=<Accommodation+Name>".
+
+  Make sure the output strictly follows the JSON structure. Include 3–5 practical travel tips, focus on the interests and budget, and ensure the itinerary is locally authentic and feasible.
   `;
 }
+
 
 function parseGeminiResponse(text: string): TripItinerary {
   try {

@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { TripItinerary } from "@shared/schema";
 import { LightbulbIcon } from "lucide-react";
+import { MapPinIcon } from "lucide-react";
 
 interface ItineraryDisplayProps {
   itinerary: TripItinerary;
@@ -54,6 +55,17 @@ export default function ItineraryDisplay({ itinerary }: ItineraryDisplayProps) {
                           <h4 className="font-medium">{activity.title}</h4>
                         </div>
                         <p className="text-sm text-muted-foreground">{activity.description}</p>
+                          {activity.googleMapsLink && (
+                            <a
+                              href={activity.googleMapsLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1 text-primary text-sm underline hover:text-primary/80"
+                            >
+                              <MapPinIcon className="h-4 w-4" />
+                              View on Google Maps
+                            </a>
+                            )}
                       </div>
                     ))}
                   </div>

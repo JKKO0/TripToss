@@ -58,6 +58,7 @@ export type TripItinerary = {
       time: string;
       title: string;
       description: string;
+      googleMapsLink: string;
     }[];
   }[];
   tips: string[];

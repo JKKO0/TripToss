@@ -12,14 +12,15 @@ import Login from "@/pages/login";
 import Signup from "@/pages/signup";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
+import PrivateRoute from "@/components/PrivateRoute";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
-      <Route path="/plan-trip" component={PlanTrip} />
-      <Route path="/trip/:id" component={TripDetails} />
-      <Route path="/saved-trips" component={SavedTrips} />
+      <PrivateRoute path="/plan-trip" component={PlanTrip} />
+      <PrivateRoute path="/trip/:id" component={TripDetails} />
+      <PrivateRoute path="/saved-trips" component={SavedTrips} />
       <Route path="/login" component={Login} />
       <Route path="/signup" component={Signup} />
       <Route component={NotFound} />

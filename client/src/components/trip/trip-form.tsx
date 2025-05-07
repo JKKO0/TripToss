@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import InterestSelection from "./interest-selection";
 import { Loader2 } from "lucide-react";
+import { FaMapMarkerAlt, FaCalendar, FaMoneyBillWave, FaBed, FaBolt } from "react-icons/fa";
 
 type FormValues = z.infer<typeof tripPromptSchema>;
 
@@ -96,7 +97,7 @@ export default function TripForm({ onSubmit, simplified = false, isLoading = fal
                       className={simplified ? "w-full p-3 rounded-lg border border-neutral-light focus:outline-none focus:ring-2 focus:ring-primary pl-10" : "pl-10"}
                       {...field} 
                     />
-                    <i className="fas fa-map-marker-alt absolute left-3 top-3.5 text-neutral-dark"></i>
+                      <FaMapMarkerAlt className="absolute left-3 top-3.5 text-neutral-dark h-4 w-4" />
                   </div>
                 </FormControl>
                 <FormMessage />
@@ -123,8 +124,8 @@ export default function TripForm({ onSubmit, simplified = false, isLoading = fal
                         <SelectItem value="More than 2 weeks">More than 2 weeks</SelectItem>
                       </SelectContent>
                     </Select>
-                    <i className="fas fa-calendar absolute left-3 top-3.5 text-neutral-dark"></i>
-                  </div>
+                    <FaCalendar className="absolute left-3 top-3.5 text-neutral-dark h-4 w-4" />
+                    </div>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -149,8 +150,8 @@ export default function TripForm({ onSubmit, simplified = false, isLoading = fal
                         <SelectItem value="Luxury">Luxury</SelectItem>
                       </SelectContent>
                     </Select>
-                    <i className="fas fa-money-bill-wave absolute left-3 top-3.5 text-neutral-dark"></i>
-                  </div>
+                    <FaMoneyBillWave className="absolute left-3 top-3.5 text-neutral-dark h-4 w-4" />
+                    </div>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -171,7 +172,7 @@ export default function TripForm({ onSubmit, simplified = false, isLoading = fal
                     className={simplified ? "w-full p-3 rounded-lg border border-neutral-light focus:outline-none focus:ring-2 focus:ring-primary pl-10" : "pl-10"}
                     {...field} 
                   />
-                  <i className="fas fa-bed absolute left-3 top-3.5 text-neutral-dark"></i>
+                  <FaBed className="absolute left-3 top-3.5 text-neutral-dark h-4 w-4" />
                 </div>
               </FormControl>
               <FormMessage />
@@ -209,7 +210,7 @@ export default function TripForm({ onSubmit, simplified = false, isLoading = fal
               </>
             ) : (
               <>
-                <i className="fas fa-bolt mr-2"></i>
+                <FaBolt className="mr-2 h-4 w-4" />
                 Generate Travel Plan
               </>
             )}
